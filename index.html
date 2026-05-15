@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -22,6 +22,7 @@
   --gold:#c9a227;
   --dark:#0b1220;
   --card:#111827;
+  --white:#ffffff;
   --text:#cbd5e1;
 }
 
@@ -32,10 +33,27 @@
 }
 
 body{
-  font-family:Inter, sans-serif;
+  font-family:'Inter',sans-serif;
   background:var(--dark);
-  color:white;
+  color:var(--white);
+  line-height:1.7;
   overflow-x:hidden;
+}
+
+/* =========================
+   CURSOR GLOW
+========================= */
+
+.cursor{
+  position:fixed;
+  width:380px;
+  height:380px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(201,162,39,0.18), transparent 60%);
+  pointer-events:none;
+  transform:translate(-50%,-50%);
+  z-index:1;
+  filter:blur(10px);
 }
 
 /* =========================
@@ -47,10 +65,9 @@ header{
   top:0;
   width:100%;
   z-index:999;
-
-  background:rgba(15,23,42,0.55);
-  backdrop-filter:blur(16px);
-  border-bottom:1px solid rgba(255,255,255,0.06);
+  background:rgba(0,0,0,0.65);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,0.08);
 }
 
 .navbar{
@@ -64,24 +81,13 @@ header{
 }
 
 .logo{
-  color:var(--gold);
+  font-size:24px;
   font-weight:800;
-  letter-spacing:0.5px;
-}
-
-.navbar a{
-  color:white;
-  text-decoration:none;
-  margin-left:16px;
-  font-weight:500;
-}
-
-.navbar a:hover{
   color:var(--gold);
 }
 
 /* =========================
-   HERO
+   HERO (ENHANCED)
 ========================= */
 
 .hero{
@@ -90,8 +96,9 @@ header{
   align-items:center;
   justify-content:center;
   text-align:center;
-
   padding:140px 20px;
+
+  position:relative;
 
   background:
   linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.85)),
@@ -99,17 +106,21 @@ header{
 }
 
 .hero-content{
-  max-width:900px;
+  max-width:850px;
+  position:relative;
+  z-index:2;
 }
 
 .hero h1{
-  font-size:clamp(40px,6vw,72px);
-  margin-bottom:16px;
+  font-size:clamp(42px,7vw,74px);
+  line-height:1.1;
+  margin-bottom:20px;
 }
 
 .hero p{
   color:var(--text);
-  margin-bottom:28px;
+  font-size:20px;
+  margin-bottom:30px;
 }
 
 /* =========================
@@ -117,12 +128,11 @@ header{
 ========================= */
 
 .btn{
-  display:inline-block;
-  padding:14px 26px;
-  border-radius:12px;
-  font-weight:600;
+  padding:15px 28px;
+  border-radius:10px;
   text-decoration:none;
-  margin:6px;
+  font-weight:700;
+  display:inline-block;
   transition:0.3s;
 }
 
@@ -133,7 +143,7 @@ header{
 }
 
 .btn-primary:hover{
-  transform:translateY(-3px);
+  transform:translateY(-4px) scale(1.03);
 }
 
 .btn-outline{
@@ -141,12 +151,17 @@ header{
   color:var(--gold);
 }
 
+.btn-outline:hover{
+  background:var(--gold);
+  color:black;
+}
+
 /* =========================
    SECTIONS
 ========================= */
 
 section{
-  padding:90px 0;
+  padding:100px 0;
 }
 
 .container{
@@ -162,7 +177,7 @@ section{
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:22px;
+  gap:24px;
 }
 
 /* =========================
@@ -170,10 +185,10 @@ section{
 ========================= */
 
 .card{
-  background:rgba(17,24,39,0.7);
+  background:rgba(17,24,39,0.75);
   border:1px solid rgba(255,255,255,0.06);
   border-radius:18px;
-  padding:24px;
+  padding:28px;
   transition:0.25s ease;
   transform-style:preserve-3d;
 }
@@ -187,40 +202,31 @@ section{
    IMAGES
 ========================= */
 
-.img-card{
+.office-image,
+.gallery img,
+.team-card img{
   border-radius:18px;
-  overflow:hidden;
-}
-
-.img-card img{
   width:100%;
-  height:260px;
-  object-fit:cover;
   transition:0.5s;
 }
 
-.img-card:hover img{
-  transform:scale(1.06);
+.gallery img{
+  height:240px;
+  object-fit:cover;
 }
 
-/* =========================
-   MAP (FIRST)
-========================= */
-
-.map{
-  border-radius:18px;
-  overflow:hidden;
-  margin-bottom:30px;
+.gallery img:hover{
+  transform:scale(1.05);
 }
 
 /* =========================
    CONTACT BOX
 ========================= */
 
-.contact{
-  background:rgba(17,24,39,0.7);
-  border-radius:18px;
-  padding:28px;
+.contact-box{
+  background:rgba(17,24,39,0.75);
+  padding:50px;
+  border-radius:22px;
 }
 
 /* =========================
@@ -238,31 +244,37 @@ section{
 }
 
 .float-btn{
-  width:56px;
-  height:56px;
+  width:60px;
+  height:60px;
   border-radius:50%;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:20px;
+  font-size:22px;
   text-decoration:none;
-  box-shadow:0 10px 25px rgba(0,0,0,0.35);
+  box-shadow:0 10px 25px rgba(0,0,0,0.4);
 }
 
-.call{background:#22c55e;color:black;}
-.wa{background:#25D366;color:black;}
+.call-btn{background:#22c55e;color:black;}
+.wa-btn{background:#25D366;color:black;}
 
 </style>
+
 </head>
 
 <body>
 
+<!-- CURSOR -->
+<div class="cursor"></div>
+
+<!-- NAV -->
 <header>
   <div class="navbar">
     <div class="logo">Rozaidi Read & Co.</div>
-    <div>
+
+    <div class="nav-links">
       <a href="#services">Services</a>
-      <a href="#team">Team</a>
+      <a href="#team">Our Team</a>
       <a href="#contact">Contact</a>
     </div>
   </div>
@@ -271,11 +283,11 @@ section{
 <!-- HERO -->
 <section class="hero">
   <div class="hero-content">
-    <h1>Trusted Legal Experts in Malaysia</h1>
-    <p>Corporate & Civil Law Solutions You Can Rely On</p>
+    <h1>Professional Legal Representation You Can Trust</h1>
+    <p>Corporate & Civil Law Specialists in Malaysia</p>
 
-    <a href="tel:0386844498" class="btn btn-primary">📞 Call Now</a>
-    <a href="https://wa.me/60123456789" class="btn btn-outline">💬 WhatsApp</a>
+    <a href="tel:0386844498" class="btn btn-primary">Call For Consultation</a>
+    <a href="https://wa.me/60123456789" class="btn btn-outline">WhatsApp Us</a>
   </div>
 </section>
 
@@ -291,103 +303,110 @@ section{
 
 <!-- OFFICE -->
 <section>
-  <div class="container img-card">
-    <img src="images/office.png" alt="Office">
+  <div class="container">
+    <img src="images/office.png" class="office-image">
   </div>
 </section>
 
 <!-- SERVICES -->
 <section id="services">
   <div class="container grid">
+
     <div class="card">Civil Litigation</div>
     <div class="card">Corporate Law</div>
     <div class="card">Contract Drafting</div>
     <div class="card">Legal Consultation</div>
+
   </div>
 </section>
 
-<!-- TEAM IMAGES -->
+<!-- TEAM -->
 <section id="team">
   <div class="container grid">
-    <div class="img-card"><img src="images/lawyer1.jpg"></div>
-    <div class="img-card"><img src="images/lawyer2.jpg"></div>
-    <div class="img-card"><img src="images/consultation.jpg"></div>
+
+    <div class="card">
+      <img src="images/lawyer1.jpg">
+    </div>
+
+    <div class="card">
+      <img src="images/lawyer2.jpg">
+    </div>
+
+    <div class="card">
+      <img src="images/consultation.jpg">
+    </div>
+
   </div>
 </section>
 
 <!-- GALLERY -->
 <section>
   <div class="container grid">
-    <div class="img-card"><img src="images/meetingroom.jpg"></div>
-    <div class="img-card"><img src="images/office2.png"></div>
-    <div class="img-card"><img src="images/corporate.png"></div>
+
+    <img src="images/meetingroom.jpg">
+    <img src="images/office2.png">
+    <img src="images/corporate.png">
+
   </div>
 </section>
 
-<!-- CONTACT (MAP FIRST) -->
+<!-- CONTACT -->
 <section id="contact">
 
-  <div class="container">
+  <div class="container contact-box">
 
-    <!-- MAP FIRST -->
-    <div class="map">
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d0"
-        width="100%"
-        height="320"
-        style="border:0;"
-        loading="lazy">
-      </iframe>
-    </div>
+    <h2>Speak With Our Legal Team</h2>
 
-    <!-- CONTACT INFO -->
-    <div class="contact">
+    <p><b>Phone:</b> <a href="tel:0386844498">03-8684 4498</a></p>
+    <p><b>Email:</b> Rozaidiread@gmail.com</p>
 
-      <h2>Contact Us</h2>
-
-      <p><b>📞 Phone:</b> <a href="tel:0386844498">03-8684 4498</a></p>
-
-      <p><b>📧 Email:</b> Rozaidiread@gmail.com</p>
-
-      <p><b>📍 Address:</b><br>
-      338, Jln Tun Razak, Kuala Lumpur</p>
-
-      <a href="tel:0386844498" class="btn btn-primary">Call Office</a>
-
-    </div>
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18"
+      width="100%"
+      height="300"
+      style="border:0;border-radius:18px;">
+    </iframe>
 
   </div>
 
 </section>
 
-<!-- FLOATING BUTTONS -->
+<!-- FLOATING -->
 <div class="floating">
-  <a href="tel:0386844498" class="float-btn call">📞</a>
-  <a href="https://wa.me/60123456789" class="float-btn wa">💬</a>
+  <a href="tel:0386844498" class="float-btn call-btn">📞</a>
+  <a href="https://wa.me/60123456789" class="float-btn wa-btn">💬</a>
 </div>
 
 <script>
 
+/* CURSOR */
+const cursor = document.querySelector(".cursor");
+
+document.addEventListener("mousemove",(e)=>{
+  cursor.style.left = e.clientX + "px";
+  cursor.style.top = e.clientY + "px";
+});
+
 /* SIMPLE SAFE 3D */
-document.querySelectorAll(".card,.img-card").forEach(el=>{
+document.querySelectorAll(".card").forEach(card=>{
 
-  el.addEventListener("mousemove",(e)=>{
+  card.addEventListener("mousemove",(e)=>{
 
-    const r = el.getBoundingClientRect();
+    const r = card.getBoundingClientRect();
 
-    const x = (e.clientX - r.left) / r.width;
-    const y = (e.clientY - r.top) / r.height;
+    const x = (e.clientX - r.left)/r.width;
+    const y = (e.clientY - r.top)/r.height;
 
     const rx = (y - 0.5) * -8;
     const ry = (x - 0.5) * 8;
 
-    el.style.transform =
-    `rotateX(${rx}deg) rotateY(${ry}deg)`;
+    card.style.transform =
+    `translateY(-6px) rotateX(${rx}deg) rotateY(${ry}deg)`;
 
   });
 
-  el.addEventListener("mouseleave",()=>{
-    el.style.transform = "rotateX(0) rotateY(0)";
+  card.addEventListener("mouseleave",()=>{
+    card.style.transform = "translateY(0)";
   });
 
 });
